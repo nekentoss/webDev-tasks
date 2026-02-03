@@ -1,0 +1,6 @@
+.picture{
+    width: 220px;
+    height: 210px;
+    border: 1px solid black;
+    background-image: url(./img/cat.png);
+}
