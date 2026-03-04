@@ -7,12 +7,14 @@ import styles from './styles.module.css'
 import { useState } from "react"
 import { useEffect } from "react"
 import List from "../../components/List/List.jsx"
+import { Posts } from "../../components/Posts/Posts";
+import { Kinopoisk } from "../../components/Kinopoisk/Kinopoisk";
 const App = () => {
 
     const [counter, setCounter] = useState(0)
     const [isTextVisible, setTextVisible] = useState(true)
 
-// Проверка этапов рендеринга
+// Проверка этапов рендерингаффф
     useEffect(() => {
         console.log("Монтирование")
     }, []);
@@ -54,6 +56,9 @@ const App = () => {
                 <p className={styles.content}>Local style</p>
                 <HeaderSecond title1="3.Список с условным рендерингом" />
                 <List />
+                <Header />
+                <Posts />
+                <Kinopoisk />
             </Wrapper>
         </div>
     )
