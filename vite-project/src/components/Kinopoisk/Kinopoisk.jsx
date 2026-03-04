@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import styles from "./Kinopoisk.module.css";
 import { SearchInput } from "./SearchInput";
 import { FilterSelect } from "./FilterSelect";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleFavorite } from "../../store/favoritesSlice";
 
 export const Kinopoisk = () => {
   const [films, setFilms] = useState([]);
@@ -9,6 +11,8 @@ export const Kinopoisk = () => {
   const [ratingFilter, setRatingFilter] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+  const favorites = useSelector((state) => state.favorites.items);
 
   useEffect(() => {
     fetch(
@@ -34,7 +38,9 @@ export const Kinopoisk = () => {
         setLoading(false);
       });
   }, []);
-
+  const isFavorite = favorites.some(
+    (item) => item.id === (film.filmId || film.kinopoiskId)
+  );
   const filteredFilms = films
     .filter((film) =>
       film.nameRu?.toLowerCase().includes(search.toLowerCase())
@@ -70,6 +76,18 @@ export const Kinopoisk = () => {
           </div>
         ))}
       </div>
+      <button
+        onClick={() =>
+          dispatch(
+            toggleFavorite({
+              id: film.filmId || film.kinopoiskId,
+              name: film.nameRu,
+            })
+          )
+        }
+      >
+        {isFavorite ? "❤️ Удалить" : "🤍 В избранное"}
+      </button>      
     </div>
   );
 };
