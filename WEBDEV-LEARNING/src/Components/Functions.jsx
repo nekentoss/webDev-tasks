@@ -20,7 +20,7 @@ export const RenderText = () =>{
         <div>
             <button onClick={() => setRenderText(true)}>Показать текст</button>
             <button onClick={() => setRenderText(false)}>Убрать текст</button><br />
-            {isRenderText && <text>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorem quo ut praesentium cum beatae accusantium vel quaerat ipsa ad incidunt! Natus dolor, reiciendis nemo voluptate omnis totam eius! Vitae, alias.</text> }
+            {isRenderText && <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorem quo ut praesentium cum beatae accusantium vel quaerat ipsa ad incidunt! Natus dolor, reiciendis nemo voluptate omnis totam eius! Vitae, alias.</p> }
         </div>
     )
 }

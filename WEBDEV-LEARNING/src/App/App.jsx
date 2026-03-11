@@ -2,7 +2,7 @@ import { Description } from '../Components/Description.jsx'
 import './styles/styles.css'
 import { Counter, RenderText, MountText, RenderList } from '../Components/Functions.jsx'
 import styles from './styles/styles.module.css'
-
+import ApiComponent from '../Components/ApiComponent.jsx'
 const App = () => {
     return (
         <div>
@@ -30,6 +30,7 @@ const App = () => {
             ////////////////
             <br />
             <RenderList/>
+            <ApiComponent/>
         </div>
     )
 }

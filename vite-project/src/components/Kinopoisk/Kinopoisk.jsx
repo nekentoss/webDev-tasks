@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
-import styles from "./Kinopoisk.module.css";
-import { SearchInput } from "./SearchInput";
-import { FilterSelect } from "./FilterSelect";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleFavorite } from "../../store/favoritesSlice";
+import { useEffect, useState } from 'react';
+import styles from './Kinopoisk.module.css';
+import { SearchInput } from './SearchInput';
+import { FilterSelect } from './FilterSelect';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleFavorite } from '../../store/favoritesSlice';
 
 export const Kinopoisk = () => {
   const [films, setFilms] = useState([]);
-  const [search, setSearch] = useState("");
-  const [ratingFilter, setRatingFilter] = useState("");
+  const [search, setSearch] = useState('');
+  const [ratingFilter, setRatingFilter] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
@@ -16,16 +16,16 @@ export const Kinopoisk = () => {
 
   useEffect(() => {
     fetch(
-      "https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS",
+      'https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS',
       {
         headers: {
-          "X-API-KEY": import.meta.env.VITE_KP_API_KEY,
+          'X-API-KEY': import.meta.env.VITE_KP_API_KEY,
         },
-      }
+      },
     )
       .then((res) => {
         if (!res.ok) {
-          throw new Error("Ошибка при загрузке фильмов");
+          throw new Error('Ошибка при загрузке фильмов');
         }
         return res.json();
       })
@@ -39,14 +39,12 @@ export const Kinopoisk = () => {
       });
   }, []);
   const isFavorite = favorites.some(
-    (item) => item.id === (film.filmId || film.kinopoiskId)
+    (item) => item.id === (film.filmId || film.kinopoiskId),
   );
   const filteredFilms = films
+    .filter((film) => film.nameRu?.toLowerCase().includes(search.toLowerCase()))
     .filter((film) =>
-      film.nameRu?.toLowerCase().includes(search.toLowerCase())
-    )
-    .filter((film) =>
-      ratingFilter ? Number(film.rating) >= Number(ratingFilter) : true
+      ratingFilter ? Number(film.rating) >= Number(ratingFilter) : true,
     );
 
   if (loading) return <p>Загрузка фильмов...</p>;
@@ -63,14 +61,8 @@ export const Kinopoisk = () => {
 
       <div className={styles.container}>
         {filteredFilms.slice(0, 20).map((film) => (
-          <div
-            key={film.filmId || film.kinopoiskId}
-            className={styles.card}
-          >
-            <img
-              src={film.posterUrlPreview}
-              alt={film.nameRu}
-            />
+          <div key={film.filmId || film.kinopoiskId} className={styles.card}>
+            <img src={film.posterUrlPreview} alt={film.nameRu} />
             <h4>{film.nameRu}</h4>
             <p>Рейтинг: {film.rating}</p>
           </div>
@@ -82,12 +74,12 @@ export const Kinopoisk = () => {
             toggleFavorite({
               id: film.filmId || film.kinopoiskId,
               name: film.nameRu,
-            })
+            }),
           )
         }
       >
-        {isFavorite ? "❤️ Удалить" : "🤍 В избранное"}
-      </button>      
+        {isFavorite ? '❤️ Удалить' : '🤍 В избранное'}
+      </button>
     </div>
   );
 };

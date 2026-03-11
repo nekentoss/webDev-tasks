@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import styles from "./Posts.module.css";
+import { useEffect, useState } from 'react';
+import styles from './Posts.module.css';
 
 export const Posts = () => {
   const [posts, setPosts] = useState([]);
@@ -7,10 +7,10 @@ export const Posts = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/posts")
+    fetch('https://jsonplaceholder.typicode.com/posts')
       .then((res) => {
         if (!res.ok) {
-          throw new Error("Ошибка загрузки данных");
+          throw new Error('Ошибка загрузки данных');
         }
         return res.json();
       })
