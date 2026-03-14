@@ -1,0 +1,1 @@
+export { kinopoiskApi } from './kinopoiskApi';

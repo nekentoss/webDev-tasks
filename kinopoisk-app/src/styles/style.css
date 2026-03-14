@@ -1,0 +1,24 @@
+.link {
+  margin-right: 15px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  text-transform: none;
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  color: #ffffff;
+}
+
+.link.active {
+  color: #f5c518;
+  font-weight: bold;
+}
+
+.pending {
+  opacity: 0.5;
+}
+
+.transitioning {
+  color: #ff6b6b;
+}
